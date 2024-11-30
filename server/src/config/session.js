@@ -1,6 +1,6 @@
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
-const connection = require('./db');
+const connection = require("./db");
 require("dotenv").config();
 
 // const { createClient } = require("redis");
@@ -14,13 +14,13 @@ require("dotenv").config();
 
 // const redisStore = new RedisStore({
 //   client: redisClient,
-//   prefix: 'sanzCRM:',
+//   prefix: 'CPMS:',
 // });
 
 const mongoStore = new MongoStore({
   mongoUrl: process.env.MONGODB_URI,
   mongooseConnection: connection,
-  collectionName: 'sessions',
+  collectionName: "sessions",
 });
 
 module.exports = session({

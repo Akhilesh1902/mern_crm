@@ -16,9 +16,28 @@ export function DealDrawer() {
 
   return (
     <Drawer direction="right" open={openDrawer} onOpenChange={handleOpenChange}>
-        <DrawerContent className="w-max h-full ml-auto border-none overflow-y-auto overflow-x-hidden">
-          {deal ? <ViewDealForm deal={deal} /> : "Hello"}
-        </DrawerContent>
+      <DrawerContent className="w-full h-full ml-auto border-none overflow-y-auto overflow-x-hidden">
+        {deal ? (
+          <ViewDealForm deal={deal} />
+        ) : (
+          <div className="w-1/2 h-1/2 m-auto bg-white grid place-items-center">
+            <h1>Deal Creation Form</h1>
+          </div>
+        )}
+        {/* <ViewDealForm
+          deal={{
+            title: "Test",
+            name: "testDeal",
+            stage: "Initial",
+            assignee: "AKhil",
+            amount: "10000",
+            closingDate: new Date(),
+            nextStep: "closing",
+            notes: "Random Notes",
+            attachements: null,
+          }}
+        /> */}
+      </DrawerContent>
     </Drawer>
   );
 }

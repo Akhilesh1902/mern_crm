@@ -5,11 +5,12 @@ import PolarChart from "../charts/PolarChart";
 import Index from "../shared/Index";
 
 export default function Dashboard() {
+  console.log("inside dash");
   return (
     <div className="px-4">
-      <h1>Dashboard</h1>
+      <h1 className="text-xl font-bold">Dashboard</h1>
       <Grid templateRows="repeat(1, 1fr)" templateColumns="repeat(4, 1fr)" gap={4}>
-        <GridItem colSpan={1} bg="">
+        {/* <GridItem colSpan={1} bg="">
           <Index />
         </GridItem>
         <GridItem colSpan={1} bg="">
@@ -20,7 +21,7 @@ export default function Dashboard() {
         </GridItem>
         <GridItem colSpan={1} bg="">
           <Index />
-        </GridItem>
+        </GridItem> */}
         <GridItem colSpan={5} bg="">
           <h2>Charts</h2>
           <HStack>

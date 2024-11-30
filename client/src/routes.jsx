@@ -21,6 +21,7 @@ import DealList from "./components/entities/deals/list.jsx";
 import { DealDrawer } from "./components/entities/deals/drawer.jsx";
 import { ProfileForm } from "./components/profile/profile-form.jsx";
 import ProfilePage from "./pages/profile-page.jsx";
+import Dashboard from "./components/dashboard/Dashboard.jsx";
 
 const routerNT = createBrowserRouter([
   {
@@ -49,6 +50,14 @@ const routerNT = createBrowserRouter([
             element: (
               <AuthenticatedRoute>
                 <CompaniesList />
+              </AuthenticatedRoute>
+            ),
+          },
+          {
+            path: "/dashboard",
+            element: (
+              <AuthenticatedRoute>
+                <Dashboard />
               </AuthenticatedRoute>
             ),
           },

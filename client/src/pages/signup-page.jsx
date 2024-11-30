@@ -53,13 +53,14 @@ export default function SignUpPage() {
         <div className="absolute inset-0" />
         <div className="relative z-20 flex items-center text-lg font-medium gap-2">
           <NotebookTabs />
-          sanzCRM
+          CPMS
         </div>
 
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
-            <p className="text-lg">&ldquo;Dêpechez vous.&rdquo;</p>
-            <footer className="text-sm">&nbsp;– l&apos;Bacha</footer>
+            <p className="text-lg">
+              &ldquo;Channel Partner Management and Sales Optimization System.&rdquo;
+            </p>
           </blockquote>
         </div>
       </div>

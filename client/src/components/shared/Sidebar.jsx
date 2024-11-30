@@ -66,7 +66,7 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
 
       <Button
         position="fixed"
-        top={120}
+        top={85}
         mr={-4}
         onClick={toggleSidebar}
         bg="none"
@@ -134,12 +134,12 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
         </Accordion>
       )}
 
-      <NavItem
+      {/* <NavItem
         icon={FaChartBar}
         label="Stats"
         to="/stats"
         isSidebarOpen={isSidebarOpen}
-      />
+      /> */}
       <NavItem
         icon={FaUsers}
         label="Contacts"

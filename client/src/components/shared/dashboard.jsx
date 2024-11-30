@@ -43,7 +43,7 @@ export function Dash({
 }) {
   const [isCollapsed, setIsCollapsed] = React.useState(defaultCollapsed);
   const navigate = useNavigate();
-
+  console.log("in dash");
   return (
     <TooltipProvider delayDuration={0}>
       <ResizablePanelGroup
@@ -84,10 +84,10 @@ export function Dash({
               {isCollapsed ? (
                 <Tooltip>
                   <TooltipTrigger>💼</TooltipTrigger>
-                  <TooltipContent side="right">sanzCRM</TooltipContent>
+                  <TooltipContent side="right">CPMS</TooltipContent>
                 </Tooltip>
               ) : (
-                "sanzCRM 💼"
+                "CPMS 💼"
               )}
             </div>
           </div>

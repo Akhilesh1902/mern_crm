@@ -21,13 +21,14 @@ import DealList from "./components/entities/deals/list.jsx";
 import { DealDrawer } from "./components/entities/deals/drawer.jsx";
 import ContactsList from "./components/entities/contacts/ContactsList.jsx";
 import ContactDetails from "./components/entities/contacts/ContactDetails.jsx";
+import Dashboard from "./components/dashboard/Dashboard.jsx";
 
 const routerSF = createBrowserRouter([
   {
     path: "/",
     element: (
       <AuthenticatedRoute>
-        <HomePage /> 
+        <HomePage />
       </AuthenticatedRoute>
     ),
     errorElement: <GeneralError />,
@@ -138,6 +139,14 @@ const routerSF = createBrowserRouter([
             element: (
               <AuthenticatedRoute>
                 <Index />
+              </AuthenticatedRoute>
+            ),
+          },
+          {
+            path: "/dashboard",
+            element: (
+              <AuthenticatedRoute>
+                <Dashboard />
               </AuthenticatedRoute>
             ),
           },

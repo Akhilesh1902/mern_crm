@@ -13,18 +13,20 @@ import TaskList from "./components/entities/tasks/list.jsx";
 import { TaskFormDrawer } from "./components/entities/tasks/form-drawer.jsx";
 import { TaskForm } from "./components/entities/tasks/form-edit.jsx";
 import { TaskForm2 } from "./components/entities/tasks/form-create.jsx";
-import Dashboard from "./components/dashboard/Dashboard.jsx";
-import KanbanBoard from "./components/dashboard/kanban.jsx";
+// import Dashboard from "./components/dashboard/Dashboard.jsx";
+// import KanbanBoard from "./components/dashboard/kanban.jsx";
 import ProfilePage from "./components/profile/ProfilePage.jsx";
 import CompanyDetails from "./components/entities/companies/CompanyDetails.jsx";
 import CompaniesList from "./components/entities/companies/CompaniesList.jsx";
 
-import { BrowserRouter, Route, Routes } from "react-router-dom/dist";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom/dist";
 import { useState } from "react";
 
 import "./styles/index.css";
 import customTheme from "./lib/theme";
 import { AuthenticatedRoute, UnauthenticatedRoute } from "./features/auth/videur";
+import KanbanBoard from "./components/dashboard/kanban";
+import Dashboard from "./components/dashboard/Dashboard";
 
 export default function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -32,6 +34,9 @@ export default function App() {
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
+  const location = useLocation();
+  console.log(location.pathname);
 
   return (
     <ChakraProvider theme={customTheme}>
@@ -71,10 +76,15 @@ export default function App() {
                 />
                 <Route
                   path="/dashboard"
+                  // element={
+                  //   <AuthenticatedRoute>
+                  //     <Dashboard />
+                  //   </AuthenticatedRoute>
+                  // }
                   element={
-                    <AuthenticatedRoute>
-                      <Dashboard />
-                    </AuthenticatedRoute>
+                    <>
+                      <p>HEllo</p>
+                    </>
                   }
                   errorElement={<GeneralError />}
                 />

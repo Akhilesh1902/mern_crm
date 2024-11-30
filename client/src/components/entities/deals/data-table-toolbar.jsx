@@ -10,7 +10,7 @@ import { focusDealById, toggleDealDrawer } from "@/features/deals/slice";
 import { Plus } from "lucide-react";
 import { assignees, stages } from "@/data/deals";
 
-// DEALS!! FILTER NEED CHANGING
+// DEALS!! FILTER NEED and ADD DEALS NEED UPDATE
 export function DataTableToolbar({ table }) {
   const isFiltered = table.getState().columnFilters.length > 0;
   const dispatch = useDispatch();
@@ -65,7 +65,7 @@ export function DataTableToolbar({ table }) {
           dispatch(toggleDealDrawer());
         }}
         className="ml-2 h-8 px-2 lg:px-3 border text-xs rounded-md">
-        <Plus size="16"/>
+        <Plus size="16" />
       </Button>
     </div>
   );

@@ -14,54 +14,11 @@ const Logo = () => {
           color={textColor}
           textShadow={`2px 2px ${shadowColor}`}
           position="relative"
-          top={-2}
-          left={-2}
-          mr="-0.5rem">
-          S
-        </Text>
-        <Text
-          display="inline-block"
-          fontSize="2xl"
-          fontWeight="bold"
-          color={textColor}
-          textShadow={`2px 2px ${shadowColor}`}
-          position="relative"
-          top={1}
-          left={-2}
-          mr="-1rem">
-          A
-        </Text>
-        <Text
-          display="inline-block"
-          fontSize="4xl"
-          fontWeight="bold"
-          color={textColor}
-          textShadow={`2px 2px ${shadowColor}`}
-          position="relative"
-          top={-2}
-          mr="-0.5rem"
-          left={-1}>
-          N
-        </Text>
-        <Text
-          display="inline-block"
-          fontSize="3xl"
-          fontWeight="bold"
-          color={textColor}
-          textShadow={`2px 2px ${shadowColor}`}
-          position="relative"
-          left={-1}>
-          Z
-        </Text>
-        <Text
-          fontSize="sm"
-          fontWeight="medium"
-          color={textColor}
-          textShadow={`1px 1px ${shadowColor}`}
-          position="absolute"
-          bottom={-2}
-          right={-3}>
-          CRM
+          // top={-2}
+          // left={-2}
+          // mr="-0.5rem"
+        >
+          CPMS
         </Text>
       </Box>
     </Flex>
