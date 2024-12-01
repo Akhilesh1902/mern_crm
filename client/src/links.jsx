@@ -151,6 +151,14 @@ const routerSF = createBrowserRouter([
             ),
           },
           {
+            path: "/kanban",
+            element: (
+              <AuthenticatedRoute>
+                <Dashboard />
+              </AuthenticatedRoute>
+            ),
+          },
+          {
             path: "*",
             element: <NotFoundError />,
           },

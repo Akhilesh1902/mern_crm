@@ -15,7 +15,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import dealSchema, { assignees, stages } from "@/data/deals";
 
 import { useFieldArray, useForm } from "react-hook-form";
-import { useDeleteDealMutation, useEditDealMutation } from "@/features/api/deals";
+import {
+  useCreateDealMutation,
+  useDeleteDealMutation,
+  // useEditDealMutation,
+} from "@/features/api/deals";
 import { useDispatch } from "react-redux";
 import { useUploadThing } from "@/lib/uploadthing";
 import { focusDealById, toggleDealDrawer } from "@/features/deals/slice";
@@ -36,18 +40,61 @@ import {
 } from "@/components/ui/context-menu";
 import { Separator } from "@/components/ui/separator";
 
-export default function DealCreationFrom({ deal }) {
+export default function DealCreationFrom() {
+  const deal = {
+    label: "Sample Lead",
+    assignee: {
+      name: "John Doe",
+      avatar: "https://example.com/avatar.jpg",
+    },
+    contact: {
+      firstName: "Jane",
+      lastName: "Smith",
+      fullName: "Jane Smith",
+      email: "jane.smith@example.com",
+      avatar: "https://example.com/jane-avatar.jpg",
+      phone: "123-456-7890",
+    },
+    company: {
+      name: "Tech Innovations LLC",
+    },
+    stage: "Qualified Lead",
+    createdAt: new Date("2023-10-01"),
+    createdBy: "admin",
+    modifiedAt: new Date("2023-10-10"),
+    modifiedBy: "admin",
+    amount: "1500",
+    closingDate: new Date("2023-12-15"),
+    nextStep: "Follow up next week",
+    leadSource: "Email Campaign",
+    notes: "This lead is interested in our new product line.",
+    attachements: [
+      {
+        name: "Proposal.pdf",
+        type: "application/pdf",
+        size: 204800,
+        url: "https://example.com/proposal.pdf",
+      },
+      {
+        name: "Contract.docx",
+        type: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        size: 102400,
+        url: "https://example.com/contract.docx",
+      },
+    ],
+  };
+
   const form = useForm({
     resolver: zodResolver(dealSchema),
     defaultValues: {
-      title: deal.title,
-      stage: deal.stage,
-      assignee: deal.assignee,
-      amount: String(deal.amount),
-      closingDate: new Date(deal.closingDate),
-      nextStep: deal.nextStep,
-      notes: deal.notes,
-      attachements: deal.attachements,
+      title: "",
+      stage: "",
+      assignee: "",
+      amount: "",
+      closingDate: new Date(),
+      nextStep: "",
+      notes: "",
+      attachements: null,
     },
     mode: "onSubmit",
   });
@@ -59,9 +106,9 @@ export default function DealCreationFrom({ deal }) {
 
   // Redux, Did we really need to use it?
   const dispatch = useDispatch();
-  const [editDeal, { isLoading: pendingEdit }] = useEditDealMutation();
+  // const [editDeal, { isLoading: pendingEdit }] = useEditDealMutation();
   const [deleteDeal, { isLoading: pendingDelete }] = useDeleteDealMutation();
-
+  const [createDeal, { isLoading: pendingCreate }] = useCreateDealMutation();
   // File Uploads hooks and state
   const { startUpload, isUploading } = useUploadThing("multiUploader", {
     skipPolling: true,
@@ -93,9 +140,10 @@ export default function DealCreationFrom({ deal }) {
   };
 
   async function onSubmit(data) {
-    if (!pendingEdit) {
+    console.log(data);
+    if (!pendingCreate) {
       try {
-        await editDeal({ id: deal._id, data }).unwrap();
+        await createDeal({ id: deal._id, data }).unwrap();
         dispatch(toggleDealDrawer());
       } catch (err) {
         console.error(err);
@@ -109,10 +157,10 @@ export default function DealCreationFrom({ deal }) {
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="w-[980px] ml-auto bg-white p-6 md:p-8 lg:p-10 flex flex-col gap-6 rounded-l-xl">
           {/*DealID, Company, Deal title, creator and created time */}
-          <span className="absolute top-[18px] text-xs text-gray-400">{deal.id}</span>
+          <span className="absolute top-[18px] text-xs text-gray-400">New Deal</span>
           <div className="flex items-center justify-between">
             <div className="w-[800px]">
-              <span className="text-s">{deal.company.name}</span>
+              <span className="text-s">{deal.company?.name ?? "company"}</span>
               <FormField
                 control={form.control}
                 name="title"
@@ -122,6 +170,7 @@ export default function DealCreationFrom({ deal }) {
                       <Input
                         value={field.value}
                         onChange={field.onChange}
+                        placeholder="title"
                         className={cn(
                           "text-xl font-semibold border-none py-0 px-0",
                           "focus-visible:ring-opacity-0 shadow-none h-max",
@@ -137,7 +186,7 @@ export default function DealCreationFrom({ deal }) {
                 <span className="underline text-violet-900">
                   {deal.owner ?? "Unknown"}
                 </span>{" "}
-                • {formatDistanceToNow(deal.createdAt)} ago
+                • {formatDistanceToNow(new Date())} ago
               </p>
             </div>
             {/* Confirm. and an Edit Button*/}
@@ -249,7 +298,7 @@ export default function DealCreationFrom({ deal }) {
                 Last Activity
               </span>
               <div className="text-[1.2rem] font-semibold">
-                {format(deal.updatedAt, "PPP")}
+                {format(new Date(), "PPP")}
               </div>
             </div>
             <div className="flex flex-col gap-1">
@@ -316,11 +365,13 @@ export default function DealCreationFrom({ deal }) {
               </span>
               <div className="flex items-center gap-2">
                 <Avatar className="h-7 w-7">
-                  <AvatarImage src={deal.contact.avatar} alt="@shadcn" />
-                  <AvatarFallback>{deal.contact.firstName[0]}</AvatarFallback>
+                  <AvatarImage src={deal.contact?.avatar ?? "Avatar"} alt="@shadcn" />
+                  <AvatarFallback>
+                    {deal.contact?.firstName[0] ?? "firstName"}
+                  </AvatarFallback>
                 </Avatar>
                 <div>
-                  <h3 className="text-s">{deal.contact.fullName}</h3>
+                  <h3 className="text-s">{deal.contact?.fullName ?? "Fullname"}</h3>
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -334,7 +385,7 @@ export default function DealCreationFrom({ deal }) {
                   <p className="text-xs text-zinc-500 dark:text-gray-400">
                     Email Address
                   </p>
-                  <p className="text-s font-normal">{deal.contact.email}</p>
+                  <p className="text-s font-normal">{deal.contact?.email ?? "email"}</p>
                 </div>
               </div>
               <div className="flex items-center gap-2">
@@ -347,7 +398,7 @@ export default function DealCreationFrom({ deal }) {
                 <div>
                   <p className="text-xs text-zinc-500 dark:text-gray-400">Phone Number</p>
                   <p className="text-s font-normal">
-                    {deal.contact.phone ?? "0809898998"}
+                    {deal.contact?.phone ?? "0809898998"}
                   </p>
                 </div>
               </div>

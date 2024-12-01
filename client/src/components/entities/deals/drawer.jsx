@@ -2,6 +2,7 @@ import { Drawer, DrawerContent } from "@/components/ui/drawer";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleDealDrawer } from "@/features/deals/slice";
 import ViewDealForm from "./form-edit";
+import DealCreationFrom from "./form-create";
 
 export function DealDrawer() {
   const openDrawer = useSelector((state) => state.deals.drawer);
@@ -20,8 +21,8 @@ export function DealDrawer() {
         {deal ? (
           <ViewDealForm deal={deal} />
         ) : (
-          <div className="w-1/2 h-1/2 m-auto bg-white grid place-items-center">
-            <h1>Deal Creation Form</h1>
+          <div className="ml-auto bg-white grid place-items-center">
+            <DealCreationFrom />
           </div>
         )}
         {/* <ViewDealForm

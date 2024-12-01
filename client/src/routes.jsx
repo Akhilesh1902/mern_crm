@@ -22,6 +22,7 @@ import { DealDrawer } from "./components/entities/deals/drawer.jsx";
 import { ProfileForm } from "./components/profile/profile-form.jsx";
 import ProfilePage from "./pages/profile-page.jsx";
 import Dashboard from "./components/dashboard/Dashboard.jsx";
+import KanbanBoard from "./components/dashboard/kanban.jsx";
 
 const routerNT = createBrowserRouter([
   {
@@ -58,6 +59,14 @@ const routerNT = createBrowserRouter([
             element: (
               <AuthenticatedRoute>
                 <Dashboard />
+              </AuthenticatedRoute>
+            ),
+          },
+          {
+            path: "/kanban",
+            element: (
+              <AuthenticatedRoute>
+                <KanbanBoard />
               </AuthenticatedRoute>
             ),
           },
